@@ -1,0 +1,38 @@
+
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container d-flex flex-wrap gap-2">
+    <span class="navbar-brand">🐾 HuellitasVet</span>
+
+    <div class="d-flex flex-wrap gap-2">
+      <button type="button" class="btn btn-outline-light"
+        (click)="cambiarSeccion('mascotas')">
+        Mascotas
+      </button>
+
+      <button type="button" class="btn btn-outline-light"
+        (click)="cambiarSeccion('citas')">
+        Citas
+      </button>
+
+      <button type="button" class="btn btn-outline-light"
+        (click)="cambiarSeccion('historial')">
+        Historial
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="bg-success text-white p-4">
+  <div class="container">
+    <h1 class="h3">Sistema de gestión veterinaria</h1>
+    <p class="mb-0">Registro y atención de mascotas.</p>
+  </div>
+</header>
+
+<main class="bg-light min-vh-100 py-4">
+  <div class="container">
+    <app-mascotas *ngIf="seccion === 'mascotas'"></app-mascotas>
+    <app-citas *ngIf="seccion === 'citas'"></app-citas>
+    <app-historial *ngIf="seccion === 'historial'"></app-historial>
+  </div>
+</main>

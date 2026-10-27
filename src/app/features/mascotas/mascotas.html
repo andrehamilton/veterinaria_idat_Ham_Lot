@@ -1,0 +1,134 @@
+
+<div class="card shadow-sm mb-4">
+  <div class="card-header bg-success text-white">
+    <h2 class="h5 mb-0">
+      {{ idEditando !== null ? 'Editar mascota' : 'Registrar mascota' }}
+    </h2>
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="formulario" (ngSubmit)="guardarMascota()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Nombre de la mascota</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombre"
+            placeholder="Ej. Firulais" maxlength="20" required>
+
+          <div class="text-danger small"
+            *ngIf="formulario.get('nombre')?.touched && formulario.get('nombre')?.invalid">
+            Ingresa el nombre de la mascota.
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Especie</label>
+          <select class="form-select" formControlName="especie">
+            <option value="">Seleccionar especie</option>
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+            <option value="Ave">Ave</option>
+            <option value="Conejo">Conejo</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Raza</label>
+          <input type="text" class="form-control"
+            formControlName="raza" placeholder="Ej. Labrador" maxlength="50" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Edad</label>
+          <input type="number" min="0" class="form-control"
+            formControlName="edad" maxlength="2" placeholder="Ej. 5" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Nombre del propietario</label>
+          <input type="text" class="form-control"
+            formControlName="propietario" placeholder="Juan Pérez" maxlength="50" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Teléfono</label>
+          <input type="tel" class="form-control"
+            formControlName="telefono" placeholder="998121341" maxlength="9" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success">
+        {{ idEditando !== null ? 'Guardar cambios' : 'Registrar mascota' }}
+      </button>
+
+      <button
+        *ngIf="idEditando !== null"
+        type="button"
+        class="btn btn-secondary ms-2"
+        (click)="cancelarEdicion()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-header bg-dark text-white">
+    <h2 class="h5 mb-0">Mascotas registradas</h2>
+  </div>
+
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Especie</th>
+            <th>Raza</th>
+            <th>Edad</th>
+            <th>Propietario</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let mascota of mascotas">
+            <td>{{ mascota.nombre }}</td>
+            <td>{{ mascota.especie }}</td>
+            <td>{{ mascota.raza }}</td>
+            <td>{{ mascota.edad }}</td>
+            <td>{{ mascota.propietario }}</td>
+            <td>{{ mascota.telefono }}</td>
+            <td>
+              <div class="d-flex gap-2">
+                <button
+                  type="button"
+                  class="btn btn-warning btn-sm"
+                  (click)="editarMascota(mascota)">
+                  Editar
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  (click)="eliminarMascota(mascota.id)">
+                  Eliminar
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="mascotas.length === 0">
+            <td colspan="7" class="text-center text-muted">
+              Todavía no hay mascotas registradas.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

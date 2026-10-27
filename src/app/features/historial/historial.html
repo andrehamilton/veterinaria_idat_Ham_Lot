@@ -1,0 +1,66 @@
+<div class="container py-4">
+  <h2 class="mb-4">
+    <i class="bi bi-clipboard2-pulse"></i>
+    Historial médico
+  </h2>
+
+  <div *ngIf="mensaje" class="alert alert-success">
+    {{ mensaje }}
+  </div>
+
+  <form [formGroup]="formulario"
+        (ngSubmit)="registrar()"
+        class="card card-body shadow-sm mb-4">
+
+    <div class="mb-3">
+      <label class="form-label">Mascota</label>
+      <select class="form-select"
+              formControlName="mascotaId"
+              (change)="consultar()">
+        <option [ngValue]="0">Selecciona una mascota</option>
+        <option *ngFor="let mascota of mascotas"
+                [ngValue]="mascota.id">
+          {{ mascota.nombre }} — {{ mascota.propietario }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fecha de atención</label>
+      <input type="date" class="form-control"
+             formControlName="fecha">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Diagnóstico</label>
+      <textarea class="form-control" rows="2"
+                formControlName="diagnostico" placeholder="Distemper" required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Tratamiento</label>
+      <textarea class="form-control" rows="2"
+                formControlName="tratamiento" placeholder="Tratamiento para el distemper." required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success"
+            [disabled]="mascotas.length === 0">
+      Registrar atención
+    </button>
+  </form>
+
+  <h3>Atenciones anteriores</h3>
+
+  <div *ngFor="let atencion of atenciones"
+       class="card card-body mb-3 shadow-sm">
+    <p><strong>Fecha:</strong> {{ atencion.fecha }}</p>
+    <p><strong>Diagnóstico:</strong> {{ atencion.diagnostico }}</p>
+    <p class="mb-0">
+      <strong>Tratamiento:</strong> {{ atencion.tratamiento }}
+    </p>
+  </div>
+
+  <p *ngIf="atenciones.length === 0" class="text-muted">
+    No hay atenciones registradas para esta mascota.
+  </p>
+</div>

@@ -1,0 +1,228 @@
+
+/* ===== GESTIÓN DE CITAS VETERINARIAS ===== */
+
+:host {
+  display: block;
+  color: #26332c;
+  background-color: #f7faf8;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #24372b;
+  font-weight: 700;
+}
+
+h2 {
+  color: #146c43;
+}
+
+p {
+  color: #344b3c;
+}
+
+.text-muted {
+  color: #59665e !important;
+}
+
+/* Tarjetas */
+.card {
+  color: #26332c;
+  background-color: #ffffff;
+  border: 1px solid #dce6df;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+.card-header {
+  padding: 16px 20px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.card-header.bg-success {
+  background-color: #146c43 !important;
+  color: #ffffff !important;
+}
+
+.card-header.bg-success h1,
+.card-header.bg-success h2,
+.card-header.bg-success h3,
+.card-header.bg-success h4,
+.card-header.bg-success h5,
+.card-header.bg-success h6,
+.card-header.bg-success p,
+.card-header.bg-success span {
+  color: #ffffff !important;
+}
+
+.card-body {
+  padding: 22px;
+  background-color: #ffffff;
+}
+
+/* Etiquetas */
+.form-label {
+  color: #26332c;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+/* Campos del formulario */
+.form-control,
+.form-select {
+  min-height: 44px;
+  color: #212529;
+  background-color: #ffffff;
+  border: 1px solid #b8c8bd;
+  border-radius: 9px;
+  padding: 10px 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control::placeholder {
+  color: #68756d;
+  opacity: 1;
+}
+
+.form-control:focus,
+.form-select:focus {
+  color: #212529;
+  background-color: #ffffff;
+  border-color: #198754;
+  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.16);
+}
+
+/* Botones */
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 9px 16px;
+  transition: all 0.2s ease;
+}
+
+.btn-success {
+  color: #ffffff !important;
+  background-color: #146c43;
+  border-color: #146c43;
+}
+
+.btn-success:hover {
+  color: #ffffff !important;
+  background-color: #0f5132;
+  border-color: #0f5132;
+}
+
+.btn-primary,
+.btn-danger,
+.btn-secondary {
+  color: #ffffff !important;
+}
+
+.btn-warning {
+  color: #212529 !important;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Tabla de citas */
+.table-responsive {
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.table {
+  margin-bottom: 0;
+  vertical-align: middle;
+  color: #26332c;
+  background-color: #ffffff;
+}
+
+.table thead th {
+  padding: 14px 12px;
+  color: #173d28;
+  background-color: #e3f0e7;
+  font-weight: 700;
+  white-space: nowrap;
+  border-bottom: 2px solid #c5ddcd;
+}
+
+.table tbody td {
+  padding: 13px 12px;
+  color: #26332c;
+  background-color: #ffffff;
+}
+
+.table tbody tr:hover > * {
+  color: #1b3023;
+  background-color: #f0f7f2;
+}
+
+/* Estados de las citas */
+.badge {
+  display: inline-block;
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-weight: 600;
+}
+
+/* Mensajes */
+.alert {
+  border-radius: 10px;
+}
+
+.alert-success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+}
+
+.alert-danger {
+  color: #842029;
+  background-color: #f8d7da;
+}
+
+.alert-warning {
+  color: #664d03;
+  background-color: #fff3cd;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 15px;
+  }
+
+  .card-header {
+    padding: 13px 15px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .table {
+    font-size: 13px;
+  }
+
+  .btn {
+    padding: 7px 10px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+}

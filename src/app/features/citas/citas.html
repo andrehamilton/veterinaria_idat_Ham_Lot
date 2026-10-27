@@ -1,0 +1,270 @@
+
+<div class="container py-4">
+  <p class="text-muted mb-4">
+  </p>
+
+  <!-- FORMULARIO DE CITAS -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-success text-white">
+      <h2 class="h5 mb-0">
+        {{ idEditando !== null ? 'Editar cita' : 'Agendar cita veterinaria' }}
+      </h2>
+    </div>
+
+    <div class="card-body">
+      <div *ngIf="mensaje" class="alert alert-success">
+        {{ mensaje }}
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+
+      <form [formGroup]="formulario" (ngSubmit)="guardarCita()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="mascotaId" class="form-label">Mascota</label>
+
+            <select
+              id="mascotaId"
+              class="form-select"
+              formControlName="mascotaId"
+            >
+              <option [ngValue]="0">Seleccionar mascota</option>
+
+              <option
+                *ngFor="let mascota of mascotas"
+                [ngValue]="mascota.id"
+              >
+                {{ mascota.nombre }} - {{ mascota.especie }}
+              </option>
+            </select>
+
+            <div
+              class="text-danger small"
+              *ngIf="formulario.controls.mascotaId.touched &&
+                     formulario.controls.mascotaId.invalid"
+            >
+              Selecciona una mascota registrada.
+            </div>
+
+            <div
+              *ngIf="mascotas.length === 0"
+              class="form-text text-danger"
+            >
+              Primero debes registrar una mascota.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="fecha" class="form-label">Fecha</label>
+
+            <input
+              id="fecha"
+              type="date"
+              class="form-control"
+              formControlName="fecha"
+            />
+
+            <div
+              class="text-danger small"
+              *ngIf="formulario.controls.fecha.touched &&
+                     formulario.controls.fecha.invalid"
+            >
+              Selecciona la fecha de la cita.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="hora" class="form-label">Hora</label>
+
+            <input
+              id="hora"
+              type="time"
+              class="form-control"
+              formControlName="hora"
+            />
+
+            <div
+              class="text-danger small"
+              *ngIf="formulario.controls.hora.touched &&
+                     formulario.controls.hora.invalid"
+            >
+              Selecciona la hora de la cita.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="motivo" class="form-label">
+              Motivo de la consulta
+            </label>
+
+            <input
+              id="motivo"
+              type="text"
+              class="form-control"
+              formControlName="motivo"
+              placeholder="Ej. Vacunación o consulta médica" required
+            />
+
+            <div
+              class="text-danger small"
+              *ngIf="formulario.controls.motivo.touched &&
+                     formulario.controls.motivo.invalid"
+            >
+              Ingresa un motivo de al menos 3 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="mascotas.length === 0"
+        >
+          {{ idEditando !== null ? 'Guardar cambios' : 'Agendar cita' }}
+        </button>
+
+        <button
+          *ngIf="idEditando !== null"
+          type="button"
+          class="btn btn-secondary ms-2"
+          (click)="cancelarEdicion()"
+        >
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TABLA DE CITAS -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-dark text-white">
+      <h2 class="h5 mb-0">Citas registradas</h2>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Mascota</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Motivo</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let cita of citas">
+              <td>{{ cita.mascotaNombre }}</td>
+              <td>{{ cita.fecha | date:'dd/MM/yyyy' }}</td>
+              <td>{{ cita.hora }}</td>
+              <td>{{ cita.motivo }}</td>
+
+              <td>
+                <span
+                  class="badge"
+                  [ngClass]="{
+                    'bg-warning text-dark': cita.estado === 'Pendiente',
+                    'bg-primary': cita.estado === 'Confirmada',
+                    'bg-success': cita.estado === 'Atendida',
+                    'bg-danger': cita.estado === 'Cancelada'
+                  }"
+                  [title]="cita.estado"
+                >
+                  {{ cita.estado }}
+                </span>
+              </td>
+
+              <td>
+                <div class="d-flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    class="btn btn-warning btn-sm"
+                    [disabled]="cita.estado === 'Cancelada' ||
+                                cita.estado === 'Atendida'"
+                    (click)="editarCita(cita)"
+                  >
+                    Editar
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    (click)="eliminarCita(cita.id)"
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr *ngIf="citas.length === 0">
+              <td colspan="6" class="text-center text-muted py-4">
+                Todavía no hay citas registradas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALENDARIO DIARIO -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-success text-white">
+      <h2 class="h5 mb-0">Calendario de citas</h2>
+    </div>
+
+    <div class="card-body">
+      <label for="fechaCalendario" class="form-label">
+        Seleccionar fecha
+      </label>
+
+      <input
+        id="fechaCalendario"
+        type="date"
+        class="form-control mb-4"
+        [value]="fechaCalendario"
+        (change)="cambiarFechaCalendario($any($event.target).value)"
+      />
+
+      <div
+        *ngIf="citasDelCalendario.length === 0"
+        class="alert alert-info"
+      >
+        No hay citas registradas para esta fecha.
+      </div>
+
+      <div
+        *ngFor="let cita of citasDelCalendario"
+        class="card mb-3"
+      >
+        <div
+          class="card-body d-flex flex-wrap justify-content-between align-items-center gap-3"
+        >
+          <div>
+            <div class="fw-bold">{{ cita.hora }}</div>
+            <div>{{ cita.mascotaNombre }}</div>
+            <small class="text-muted">{{ cita.motivo }}</small>
+          </div>
+
+          <span
+            class="badge"
+            [ngClass]="{
+              'bg-warning text-dark': cita.estado === 'Pendiente',
+              'bg-primary': cita.estado === 'Confirmada',
+              'bg-success': cita.estado === 'Atendida',
+              'bg-danger': cita.estado === 'Cancelada'
+            }"
+          >
+            {{ cita.estado }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

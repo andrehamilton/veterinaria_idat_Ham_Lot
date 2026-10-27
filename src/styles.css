@@ -1,0 +1,258 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* ===================================
+   VETCARE - ESTILOS GLOBALES
+   =================================== */
+
+:root {
+  --vet-primary: #198754;
+  --vet-primary-dark: #146c43;
+  --vet-background: #f4f7f5;
+  --vet-white: #ffffff;
+  --vet-text: #26332c;
+  --vet-muted: #6c757d;
+  --vet-border: #dfe7e2;
+  --vet-radius: 14px;
+  --vet-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Configuración general */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--vet-background);
+  color: var(--vet-text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5 {
+  color: var(--vet-text);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 1.7rem;
+}
+
+/* Navegación */
+.navbar {
+  background: #172d23 !important;
+  padding: 15px 0;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.navbar-brand {
+  color: #ffffff !important;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.navbar .btn {
+  border-radius: 9px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.navbar .btn:hover {
+  background: var(--vet-primary);
+  border-color: var(--vet-primary);
+  color: #ffffff;
+}
+
+/* Contenedores */
+.container {
+  max-width: 1200px;
+}
+
+.container.py-4 {
+  padding-top: 32px !important;
+  padding-bottom: 32px !important;
+}
+
+/* Tarjetas */
+.card {
+  border: 1px solid var(--vet-border);
+  border-radius: var(--vet-radius);
+  background: var(--vet-white);
+  box-shadow: var(--vet-shadow);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--vet-border);
+}
+
+.card-header.bg-success {
+  background: var(--vet-primary) !important;
+}
+
+.card-body {
+  padding: 22px;
+}
+
+/* Formularios */
+.form-label {
+  color: var(--vet-text);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-control,
+.form-select {
+  min-height: 44px;
+  border: 1px solid #ced8d1;
+  border-radius: 9px;
+  padding: 10px 12px;
+  background-color: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea.form-control {
+  min-height: 100px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--vet-primary);
+  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.14);
+}
+
+/* Botones */
+.btn {
+  border-radius: 9px;
+  padding: 9px 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-success {
+  background: var(--vet-primary);
+  border-color: var(--vet-primary);
+}
+
+.btn-success:hover {
+  background: var(--vet-primary-dark);
+  border-color: var(--vet-primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-warning,
+.btn-danger,
+.btn-primary,
+.btn-secondary {
+  border-radius: 9px;
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(25, 135, 84, 0.3);
+  outline-offset: 2px;
+}
+
+/* Tablas */
+.table-responsive {
+  border-radius: 10px;
+}
+
+.table {
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+.table thead th {
+  padding: 14px 12px;
+  background: #eaf3ed;
+  color: #234c35;
+  border-bottom: 2px solid #d6e6da;
+  white-space: nowrap;
+}
+
+.table tbody td {
+  padding: 13px 12px;
+}
+
+.table tbody tr:hover {
+  background: #f2f8f4;
+}
+
+/* Etiquetas y mensajes */
+.badge {
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-weight: 600;
+}
+
+.alert {
+  border: none;
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+
+/* Textos secundarios */
+.text-muted {
+  color: var(--vet-muted) !important;
+}
+
+/* Espaciado entre campos */
+.row {
+  --bs-gutter-y: 1rem;
+}
+
+/* Enlaces */
+a {
+  color: var(--vet-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--vet-primary-dark);
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .container.py-4 {
+    padding-top: 22px !important;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .card-body {
+    padding: 16px;
+  }
+
+  .navbar .container {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .navbar .d-flex {
+    flex-wrap: wrap;
+  }
+
+  .navbar .btn {
+    font-size: 13px;
+    padding: 7px 10px;
+  }
+
+  .table {
+    font-size: 13px;
+  }
+}
